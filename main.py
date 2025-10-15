@@ -4,11 +4,17 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from yt_dlp import YoutubeDL
 from pydub import AudioSegment
+from pydub.utils import which
 
 # ------------------------------------------------------------
 # CONFIGURACIÓN BASE
 # ------------------------------------------------------------
 os.makedirs("downloads", exist_ok=True)
+
+# Detectar FFmpeg localmente (en carpeta /ffmpeg/bin)
+ffmpeg_path = os.path.join(os.getcwd(), "ffmpeg", "bin", "ffmpeg.exe")
+if os.path.exists(ffmpeg_path):
+    AudioSegment.converter = ffmpeg_path
 
 links = []  # Lista de canciones (url + título)
 
